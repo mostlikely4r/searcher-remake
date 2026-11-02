@@ -1,0 +1,1722 @@
+0
+Screen 12
+'ship possesions
+Let laser = 1 'check,OK
+Let roketlan = 1 'check,OK
+Let autoride = 1 'check,OK
+Let hiperdrive = 1 'check,OK
+Let autorep = 0 'OK
+Let autolas = 0 'OK
+Let autorok = 0 'OK
+Let tracer = 0 'not in work
+Let beam = 0
+Let autobeam = 0
+Let multicom = 0 'not in work
+Let autorefuel = 0 'OK
+Let dok2 = 0
+'positions and places
+Let lasfr = 1
+Let pldm = 0
+Let en = 0
+Let mxlasfr = 10
+Let beamfr = 1
+Let mxbeamfr = 10
+Let shfr = 1
+Let mxshfr = 10
+Let cruiserfr = 5
+Let fiterfr = 10
+Let fiterfr2 = 9
+Let enbasfr = 20
+Let mxcruiserfr = 11
+Let mxfiterfr2 = 11
+Let mxenbasfr = 25
+Let exshfr = 1
+Let mxexshfr = 10
+Let dok = 0
+Let moon = 1
+Let earth = 1
+Let exsha = 1
+Let tor = 1
+Let batst = 0
+Let fiterlv = 1
+Let fiterlv2 = 1
+Let torx = 325
+Let cruiserlv = 1
+Let enbaslv = 1
+Let exshl = 1
+Let trsen = 0
+Let min = 0
+Let heer = 2
+Let mon = 6
+Let jaar = 2022
+Let laserlv = 1
+Let enpro = 1
+Let fiter2 = 1
+Let cruisersh = 600
+Let cruiserdm = 0
+Let cruiser = 1
+Let autodef = 1
+Let fiter = 1
+Let roket = 5
+Let enscl = 1
+Let shscl = 1
+Let fiterx = -6000
+Let fitery = 3532
+Let cerdit = 200000
+Let fiterx2 = 6000
+Let fitery2 = -5532
+Let kiz = 1
+Let energy = 400
+Let roketlv = 1
+Let lsenbsh = 600
+Let lscruisersh = 600
+Let lsfitersh = 200
+Let lsfitersh2 = 800
+Let xwin = 930
+Let ywin = 500
+Let xwin2 = -70
+Let plmode = 2
+Let ywin2 = -500
+Let cruiserx = -9000
+Let cruisery = 8000
+Let mxsp = 10
+Let enbasx = 24121
+Let enbasy = -18000
+Let enbas = 1
+Let xcoi = 430
+Let ycoi = 0
+Let earx = -20000
+Let eary = 0
+Let fuelt = 3
+Let plsh = 200
+Let bssh = 200
+Let bsen = 400
+Let fiterdm = 0
+Let fitersh = 200
+Let fiterdm2 = 0
+Let fitersh2 = 200
+Let en = 0
+Let bsdm = 0
+Let enbsdm = 0
+Let enbsh = 600
+Let shplv = 4
+Let roklv = 1
+Let mxsh = plsh
+Let mxen = 600
+
+GoTo 2
+1
+If gur <> 1 Then GoTo 83
+If xgo < xcoi Then Let mvx = -spgo
+If ygo < ycoi Then Let mvy = -spgo
+If xgo > xcoi Then Let mvx = spgo
+If ygo > ycoi Then Let mvy = spgo
+If xgo = xcoi And ycoi = ygo Then Let gur = 0
+83
+If respst = 1 Then GoTo 74
+'responce'
+Let come = come + 1
+Locate 1, 1
+If go = 1 Then Let gotime = come + 4: Let go = 0
+If gotime = come Then Let cl = 1
+If cl = 1 Then Line (xwin, ywin)-(xwin2, ywin - 70), 0, BF: Let cl = 0
+If come = 1 Then Let cl = 1
+If come = 2 Then Print "This is your commander speaking"
+If come = 6 Then Let cl = 1
+If come = 7 Then Print "You orders are to wait until your tank is full"
+If come = 11 Then Let cl = 1
+If come = 12 Then Print "there are no enemies spoted near you"
+If come = 16 Then Let cl = 1
+If stp = 1 And mi = 0 And come > 20 Then Print "your first mission is to lokate the enemy base!": Let go = 1: Let mi = 1
+If xcoi < 900 And ycoi < 900 And xcoi > -900 And ycoi > -900 Then Let ghn = 1 Else If stp = 0 And energy < mxen - 10 Then Print "you are not ready to go!,Return to base": Let go = 1
+If energy > mxen - 10 And xcoi < 900 And ycoi < 900 And xcoi > -900 And ycoi > -900 Then Print "You are ready to go now,lift of at wil": Let go = 1: Let stp = 1
+If energy < mxen / 4 And stp = 1 Then Print "!!YOUR energy is low refuel atonce!!": Let go = 1
+If plsh < mxsh / 4 And zus = 0 Then Print "!!YOUR SHIELD IS LOW!!": Let go = 1
+If cruiserx < 1000 + xwin And cruiserx > xwin2 - 1000 And cruisery < 1000 + ywin And cruisery > ywin2 - 1000 Then Print "there is a enemy cruiser spoted near you ": Let go = 1
+If fiterx2 < 1000 + xwin And fiterx2 > xwin2 - 1000 And fitery2 < 1000 + ywin And fitery2 > ywin2 - 1000 Then Print "there is a enemy fiter spoted near you ": Let go = 1
+If fiterx < 1000 + xwin And fiterx > xwin2 - 1000 And fitery < 1000 + ywin And fitery > ywin2 - 1000 Then Print "there is a enemy fiter spoted near you ": Let go = 1
+If roket < 3 And roket > 1 And fo = 0 Then Print "you are running out of foton torpedos": Let go = 1: Let fo = 0 Else Let fo = 1
+If roket < 1 And fol = 0 Then Print "you lost all you foto torpedos ": Let go = 1: Let fol = 0 Else Let fol = 1
+If fo = 0 And wa = 0 Then Let wa = come + 40: Let fo = 1
+If fol = 0 And wa = 0 Then Let wa = come + 40: Let fol = 1
+If wa = come Then Let fol = 0: Let fo = 0: Let wa = 0
+If fuelt < 3 And fuelt > 1 And fu = 1 Then Print "you are running out of fueltanks ": Let go = 1: Let fu = 0 Else Let fu = 1
+If fuelt < 1 And ful = 1 Then Print "you lost all you fueltanks ": Let go = 1: Let ful = 0 Else Let ful = 1
+If fu = 0 And wa = 0 Then Let wa = come + 40: Let fu = 1
+If ful = 0 And wa = 0 Then Let wa = come + 40: Let ful = 1
+If wa = come Then Let ful = 0: Let fu = 0: Let wa = 0
+74
+Let cruiser = 1
+Let enbas = 1
+Let fiter = 1
+Let fiter2 = 1
+Let min = min + 1
+If min = 24 Then Let heer = heer + 1
+If min > 24 Then Let min = 0
+If heer > 30 Then Let heer = 1: Let mon = mon + 1
+If mon = 13 Then Let mon = 1: Let jaar = jaar + 1
+If leen = 1 Then GoTo 68
+GoTo 69
+68
+If min = 0 Then GoTo 73
+GoTo 69
+73
+Let lenbed = lenbed + (lenbed * .05)
+Let cerdit = cerdit - (lenbed * .05)
+Let lenbed = lenbed - (lenbed * .05)
+If cerdit < 1 Then Let plsh = plsh - (mxsh * .5)
+69
+If rekrek = 1 Then GoTo 70
+GoTo 71
+70
+If heer = 3 And min = 0 Then GoTo 72
+GoTo 71
+72
+If rekening(1) = 1 Then Let gespbed = gespbed + (gespbed * .05)
+If rekening(2) = 1 Then Let gespbed = gespbed + 200
+If rekening(3) = 1 Then Let gespbed = gespbed + (gespbed * .1)
+If rekening(4) = 1 Then Let gespbed = gespbed + (gespbed * .15)
+If rekening(5) = 1 Then Let gespbed = gespbed + (gespbed * .3)
+71
+Let enpro = 4 / shplv
+Let temx = temx + 1
+If temx = 1 Then Let en = 0
+If temx = 2 Then Let en = 0
+If temx = 100 Then Let en = 0
+If temx = 1000 Then Let en = 0
+If xcoi < s + 20 And xcoi > s - 20 And ycoi < t + 20 And ycoi > t - 20 Then GoTo 2
+Line (s + 60, t + 60)-(s - 60, t - 60), 0, BF
+Line (s + 20, t + 20)-(s - 20, t - 20), 14, BF
+Let temp = temp - 5
+If autofr = 0 GoTo 111
+If en = 0 GoTo 112
+If en = 1 Then Let lasfr = cruiserfr
+If en = 2 Then Let lasfr = fiterfr
+If en = 3 Then Let lasfr = fiterfr2
+If en = 4 Then Let lasfr = enbasfr
+If en = 1 Then Let beamfr = cruiserfr
+If en = 2 Then Let beamfr = fiterfr
+If en = 3 Then Let beamfr = fiterfr2
+If en = 4 Then Let beamfr = enbasfr
+112
+Let shfr = mxshfr
+Let exshfr = mxexshfr
+111
+Let mxlasfr = (shplv * 2 + 2)
+Let mxbeamfr = (shplv * 2 + 2)
+Let mxshfr = (shplv * 2 + 2)
+Let mxexshfr = (shplv * 2 + 2)
+If temp > -2000 Then Let temp = -2000
+If mvy1 > 10 Then Let mvy = mvy1
+If mvy1 < -10 Then Let mvy = mvy1
+If mvx1 > 10 Then Let mvx = mvx1
+Let trsen = trsen + (.05 * (shplv / 2))
+If trsen > 100 Then Let trsen = 100
+If mvx1 < -10 Then Let mvx = mvx1
+If zus = 1 And energy = mxen Then Let roket = roket + .001 + (shplv * .0001)
+If zus = 1 And energy = mxen Then Let fuelt = fuelt + .0005 + (shplv * .0001): Let mxsh = mxsh + .0005 + (shplv * .00005): Let mxen = mxen + .0005 + (shplv * .00005)
+Let keel = keel + 1
+If keel = 6000 Then Let keel = 1
+If mvx > 0 And mvy > 0 Then Let energy = energy - (mxsp * .01 + (.05 * (mvy + mvx)) * enpro)
+If mvx < 0 And mvy > 0 Then Let energy = energy - (mxsp * .01 + (.05 * (mvy - mvx)) * enpro)
+If mvx > 0 And mvy < 0 Then Let energy = energy - (mxsp * .01 + (.05 * (-mvy + mvx)) * enpro)
+If mvx < 0 And mvy < 0 Then Let energy = energy - (mxsp * .01 + (.05 * (-mvy - mvx)) * enpro)
+If mvx > 0 And mvy = 0 Then Let energy = energy - (mxsp * .01 + (.05 * (mvx)) * enpro)
+If mvx < 0 And mvy = 0 Then Let energy = energy - (mxsp * .01 + (.05 * (-mvx)) * enpro)
+If mvx = 0 And mvy > 0 Then Let energy = energy - (mxsp * .01 + (.05 * (mvy)) * enpro)
+If mvx = 0 And mvy < 0 Then Let energy = energy - (mxsp * .01 + (.05 * (-mvy)) * enpro)
+Let cerdit = cerdit + .05
+If zus = 1 Then Line (xcoi - 8, ycoi - 20)-(xcoi - 100, ycoi + 20), 14, B: Let energy = energy + .625: Let mxsp = 1: Let enpro = .001: If plsh > 45 Then Let plsh = 45
+If zus = 1 Then Line (xcoi + 12, ycoi - 20)-(xcoi + 100, ycoi + 20), 14, B: Let energy = energy + .625: Let mxsp = 1: Let enpro = .001: If plsh > 45 Then Let plsh = 45
+If zus = 1 Then Line (xcoi - 15, ycoi - 14)-(xcoi + 15, ycoi - 120), 14, B: Let energy = energy + .625: Let mxsp = 1: Let enpro = .001: If plsh > 45 Then Let plsh = 45
+If zus = 1 Then Line (xcoi - 15, ycoi + 14)-(xcoi + 15, ycoi + 120), 14, B: Let energy = energy + .625: Let mxsp = 1: Let enpro = .001: If plsh > 45 Then Let plsh = 45
+If zus = 1 Then Paint (xcoi, ycoi + 50), 0, 14
+If zus = 1 Then Paint (xcoi, ycoi - 50), 0, 14
+If zus = 1 Then Paint (xcoi - 50, ycoi), 0, 14
+If zus = 1 Then Paint (xcoi + 50, ycoi), 0, 14
+If zus = 2 And plsh > 76 Then Let zus = 3: Let resp = 1
+If zus = 3 And en = 0 And mxsp < shplv * 2 + 10 Then Let zus = 3
+If zus = 3 And en <> 0 And mxsp < shplv * 2 + 10 Then Let zus = 0
+If zus = 2 And mxsp < shplv * 2 + 10 Then Let mxsp = mxsp + 1
+If zus = 3 And mxsp < shplv * 2 + 10 Then Let mxsp = mxsp + 1
+If zus = 3 And mxsp >= shplv * 2 + 10 Then Let zus = 0: Let resp = 0
+If zus = 1 Then Let trsen = 0
+If zus = 0 Then Let resp = 0
+If zus = 2 Then Let trsen = trsen + (.2 * (shplv / 2))
+If zus = 2 And trsen > 100 Then Let trsen = 100
+If zus = 1 And exsh <> 1 And exsha > .999 Then exsh = 1: Let exsha = exsha - 1: Let exshd = 100 * exshl
+If zus = 1 Then Let exsha = exsha + .005 + (.001 * shplv)
+If mvx = 0 And mvy = 0 Then Let energy = energy - ((mxsp * .01) * enpro)
+Let plsh = plsh + shplv / 2 + 2.5
+If plsh > mxsh Then Let plsh = mxsh
+If plsh < 1 Then Let pldm = pldm + (-plsh * (4 / shplv)): Let plsh = 10
+If pldm > 99 Then GoTo 14
+Window ((xwin), (ywin))-((xwin2), (ywin2))
+
+If energy < 0 Then GoTo 14
+If energy > mxen Then Let energy = mxen
+If energy > mxen / 3 Then Let encol = 14
+If energy <= mxen / 4 Then Let encol = 4
+If energy > mxen / 2 Then Let encol = 2
+If mxen > 8000 Then Let mxen = 8000
+If mxsh > 8000 Then Let mxsh = 8000
+If mxsp > 20 Then Let spcol = 4
+If mxsp > 50 Then Let mxsp = 50
+If energy < 10 And fuelt > .99 And autorefuel = 1 Then Let fuelt = fuelt - 1: Let energy = energy + 300
+If zus = 0 And plsh < 76 And fuelt > .99 Then Let fuelt = fuelt - 1: Let plsh = plsh + 100
+If pldm > 10 And autorep = 1 Then Let pldm = pldm - (.5 * shplv): Let energy = energy - 10
+If fuelt > 120 Then Let fuelt = 120
+If exsha > 120 Then Let exsha = 120
+If exsh = 1 Then Circle (xcoi, ycoi), 32, 4
+If exsh = 1 Then Circle (xcoi, ycoi), 30, 14
+If zus = 1 And exsh = 1 And plsh < 45 Then Let exshd = exshd - ((mxsh - plsh) - exshl)
+If zus <> 1 And exsh = 1 And plsh < mxsh Then Let exshd = exshd - ((mxsh - plsh) - exshl)
+If exshd < 1 Then Let exsh = 0
+If zus <> 1 And exsh = 1 And plsh < mxsh Then Let plsh = mxsh: Let energy = energy - (15 - exshl)
+If fuelt <= 0 Then Let fuelt = 0
+If mxsp < 40 Then Let spcol = 14
+If mxsp < 20 Then Let spcol = 2
+Line (xwin2 + 475, ywin2 + 60)-(xwin2 + 475 + 50, ywin2 + 80), 1, BF
+Line (xwin2 + 475, ywin2 + 60)-(xwin2 + 475 + mxsp, ywin2 + 80), spcol, BF
+Line (xwin2 + 450, ywin2)-(xwin2 + 450 + 100, ywin2 + 20), 1, BF
+If mvy > 0 Then Line (xwin2 + 450, ywin2)-(xwin2 + 450 + mvx + mvy, ywin2 + 20), 8, BF
+If mvy < 0 Then Line (xwin2 + 450, ywin2)-(xwin2 + 450 - mvx - mvy, ywin2 + 20), 8, BF
+If mvx > 0 Then Line (xwin2 + 450, ywin2)-(xwin2 + 450 + mvx + mvy, ywin2 + 20), 8, BF
+If mvx < 0 Then Line (xwin2 + 450, ywin2)-(xwin2 + 450 - mvx - mvy, ywin2 + 20), 8, BF
+If plsh > mxsh / 3 Then Let shcol = 14
+If plsh < mxsh / 4 Then Let shcol = 4
+If plsh > mxsh / 2 Then Let shcol = 2
+If roket <= 80 Then Let roketschaal = 8
+If roket < 40 Then Let roketschaal = 4
+If roket < 20 Then Let roketschaal = 2
+If roket < 10 Then Let roketschaal = 1
+If roket > 80 Then Let roket = 80
+If fuelt <= 120 Then Let fueltschaal = 8
+If fuelt < 60 Then Let fueltschaal = 4
+If fuelt < 30 Then Let fueltschaal = 2
+If fuelt < 15 Then Let fueltschaal = 1
+If exsha <= 120 Then Let exshschaal = 8
+If exsha < 60 Then Let exshschaal = 4
+If exsha < 30 Then Let exshschaal = 2
+If exsha < 15 Then Let exshtschaal = 1
+Line (xwin2, ywin2 + 60)-(xwin2 + 100, ywin2 + 80), 1, BF
+Line (xwin, ywin2 + 60)-(xwin - 150, ywin2 + 80), 1, BF
+Line (xwin, ywin2)-(xwin - 150, ywin2 + 20), 1, BF
+Line (xwin2, ywin2 + 60)-(xwin2 + ((roket * 10) / roketschaal), ywin2 + 80), 8, BF
+Line (xwin, ywin2 + 60)-(xwin - ((fuelt * 10) / fueltschaal), ywin2 + 80), 8, BF
+Line (xwin, ywin2)-(xwin - ((exsha * 10) / exshschaal), ywin2 + 20), 8, BF
+If hiperdrive = 1 Then Line (xwin2, ywin2)-(xwin2 + 100, ywin2 + 20), 1, BF
+If hiperdrive = 1 Then Line (xwin2, ywin2)-((xwin2 + trsen), ywin2 + 20), 8, BF
+If mxen < 500 Then Let enscl = 1
+If mxen >= 500 Then Let enscl = 2
+If mxen > 1000 Then Let enscl = 4
+If mxen > 2000 Then Let enscl = 8
+If mxen > 4000 Then Let enscl = 16
+If mxsh < 500 Then Let shscl = 1
+If mxsh >= 500 Then Let shscl = 2
+If mxsh > 1000 Then Let shscl = 4
+If mxsh > 2000 Then Let shscl = 8
+If mxsh > 4000 Then Let shscl = 16
+Line (xwin2 + 500 + (mxen / enscl), ywin2 + 20)-(xwin - 500 - (mxen / enscl), ywin2 + 60), 1, BF
+Line (xwin2 + 500 + (mxsh / shscl), ywin2 + 80)-(xwin - 500 - (mxsh / shscl), ywin2 + 120), 1, BF
+Line (xwin2 + 500 + (energy / enscl), ywin2 + 20)-(xwin - 500 - (energy / enscl), ywin2 + 60), encol, BF
+Line (xwin2 + 500 + (plsh / shscl), ywin2 + 80)-(xwin - 500 - (plsh / shscl), ywin2 + 120), shcol, BF: If xcoi < 5000 And ycoi < 5000 And xcoi > -5000 And ycoi > -5000 And energy < 50 Then Let energy = energy + 50: Let bsen = bsen - 5: Let enpro = .01
+Let a$ = InKey$
+If ycoi > ywin - 450 Then Let ywin = ywin + mvy: Let ywin2 = ywin2 + mvy
+If ycoi < ywin2 + 450 Then Let ywin = ywin + mvy: Let ywin2 = ywin2 + mvy
+If xcoi > xwin - 450 Then Let xwin = xwin + mvx: Let xwin2 = xwin2 + mvx
+If xcoi < xwin2 + 450 Then Let xwin = xwin + mvx: Let xwin2 = xwin2 + mvx
+If plmode <> 1 Then GoTo 38
+Let mvy = 0: Let mvx = 0
+Let ywin = 500
+Let ywin2 = -500
+Let xwin = 500
+Let xwin2 = -500
+38
+If a$ = "o" And dok2 = 1 Then Let cerdit = cerdit + (ea2 * 1000): Let dok2 = 0
+If a$ = "4" Then Cls: Sleep
+If a$ = "5" Then GoTo 39
+If a$ = "j" And laser = 1 Then Let j = j + 1: If j = 2 Then Let j = 0
+If en <> 0 And autolas = 1 Then Let j = 1
+If rels < 100 And autolas = 1 And en <> 0 Then Let j = 0
+If en = 0 And autolas = 1 Then Let j = 0
+If a$ = "u" And exsha > .999 Then Let exsha = exsha - 1: Let exsh = exsh + 1: Let energy = energy - (25 * exshl): Let exshd = exshl * 100: If exsh = 2 Then Let exsh = 0
+If rels > 400 Then Let rels = 400
+If zus = 0 Then Let rels = rels + (shplv / 2) + 2.5
+If rels > (25 * shplv) Then Let rels = (25 * shplv)
+If j = 1 And rels > 99 Then Let rels = rels - 100: GoTo 30
+If j = 1 And rels < 0 Then Let rels = 0
+If j = 0 And rej = 1 And rels > 99 Then Let j = 1: Let rej = 0
+Line (xwin2 + 450, ywin2 + 120)-(xwin2 + 550, ywin2 + 140), 1, BF
+If rels < 201 Then Line (xwin2 + 450, ywin2 + 120)-(xwin2 + 450 + (rels / 2), ywin2 + 140), 14, BF
+If rels < 101 Then Line (xwin2 + 450, ywin2 + 120)-(xwin2 + 450 + rels, ywin2 + 140), 2, BF
+If rels > 200 Then Line (xwin2 + 450, ywin2 + 120)-(xwin2 + 450 + (rels / 4), ywin2 + 140), 4, BF
+
+57 If a$ = "i" Then GoTo 45
+52 If a$ = "9" Then Let zus = zus + 1: If zus = 3 And resp = 0 Then Let zus = 0
+If a$ = "]" And autoride = 1 Then GoTo 82
+If a$ = "[" And fuelt > .99 Then Let fuelt = fuelt - 1: If energy < mxen Then Let energy = energy + 300 Else Let plsh = plsh + 100
+If a$ = "t" And hiperdrive = 1 Then GoTo 15
+53 If a$ = "8" Then Line (xwin2, ywin)-(xwin2 + 200, ywin2), 0, BF
+If a$ = "7" Then Cls
+If a$ = "0" Then Let dis = dis + 1: If dis = 2 Then Let dis = 1
+If en <> 0 And autorok = 1 Then Let pt = 1
+If en = 0 And autorok = 1 Then Let pt = 0
+If a$ = "p" And roketlan = 1 Then Let pt = pt + 1: If pt = 2 Then Let pt = 0: Let tyo = 0
+If pt = 1 Then GoTo 6
+54 If a$ = "w" Then Let mvy = mvy + 1
+If a$ = "'" And zus = 1 Then Run "c:\menu\menu.com"
+If a$ = "x" Then Let mvy = mvy - 1
+If a$ = "y" Then Let en = 0
+If a$ = "d" Then Let mvx = mvx + 1
+If a$ = "a" Then Let mvx = mvx - 1
+If a$ = "q" Then Let mvy = mvy + 1: Let mvx = mvx - 1
+If a$ = "g" Then Let batst = batst + 1: If batst = 2 Then Let batst = 0
+If a$ = "e" Then Let mvy = mvy + 1: Let mvx = mvx + 1
+If a$ = "c" Then Let mvy = mvy - 1: Let mvx = mvx + 1
+If a$ = "z" Then Let mvy = mvy - 1: Let mvx = mvx - 1
+If a$ = "s" Then Let mvy = 0: Let mvx = 0: Let mvx1 = 0: Let mvy1 = 0
+If a$ = "6" Then Let respst = respst + 1: If respst = 2 Then Let respst = 0
+If a$ = "o" Then GoTo 4
+55 If a$ = "l" Then GoTo 8
+56 If a$ = "k" Then Let mxsp = mxsp - 1: If mxsp < 0 Then Let mxsp = 0
+If a$ = "1" Then Let plmode = 1
+If a$ = "2" Then Let plmode = 2
+If mvy > mxsp And vly = 0 Then Let mvy = mxsp
+If mvy < -mxsp And vly = 0 Then Let mvy = -mxsp
+If mvx > mxsp And vly = 0 Then Let mvx = mxsp
+If mvx < -mxsp And vly = 0 Then Let mvx = -mxsp
+If mvy > 0 And vly = 0 Then Let ycoi = ycoi + mvy
+If mvy < 0 And vly = 0 Then Let ycoi = ycoi + mvy
+If mvx > 0 And vly = 0 Then Let xcoi = xcoi + mvx
+If mvx < 0 And vly = 0 Then Let xcoi = xcoi + mvx
+If mvy > mxsp And vly = 0 Then Let mvy = mxsp
+If mvy < -mxsp And vly = 0 Then Let mvy = -mxsp
+If mvx > mxsp And vly = 0 Then Let mvx = mxsp
+If mvx < -mxsp And vly = 0 Then Let mvx = -mxsp
+'If mvx = 0 And mvy = 0 Then Let x = 1 Else Line (xcoi - mvx - 40, ycoi - mvy - 40)-(xcoi + mvx + 40, ycoi + mvy + 40), 8, BF
+If mvy > 10 Then Let mvy1 = mvy: Let mvy = 10
+If mvy < -10 Then Let mvy1 = mvy: Let mvy = -10
+If mvx > 10 Then Let mvx1 = mvx: Let mvx = 10
+If mvx < -10 Then Let mvx1 = mvx: Let mvx = -10
+'If mvx > 0 Then Sound (50 + (mvx * 10)), .1
+'If mvx < 0 Then Sound (50 - (mvx * 10)), .1
+'If mvy > 0 Then Sound (50 + (mvy * 10)), .1
+'If mvy < 0 Then Sound (50 - (mvy * 10)), .1
+'If mvy = 0 And mvx = 0 Then Sound 50, .1
+Sound 0, .5
+'moon'
+Let mox = -5000
+Let moy = 6000
+If moon = 1 And xwin2 < -4500 And xwin > -5500 And ywin2 < 6500 And ywin > 5500 Then Let qqq = 1 Else GoTo 95
+Line (-5600, 6600)-(-4400, 5400), 0, BF
+Circle (mox, moy), 400, 8
+Paint (5300, moy), 8, 8
+Paint (4700, moy), 8, 8
+Paint (mox, 5700), 8, 8
+Paint (mox, 6300), 8, 8
+If xwin2 < -4900 And xwin > -5100 And ywin2 < 6100 And ywin > 5900 Then Let plsh = plsh - 50 Else GoTo 95
+'Sound 37, 1
+95
+Let a = 0
+Let B = 0
+Let c = 0
+Let d = 0
+84
+'wall'
+If hiz = 0 Then Let wlo = wlo - 5
+If hiz = 0 Then Let wlo1 = wlo1 + 5
+If hiz = 1 Then Let wlo = wlo + 10
+If hiz = 1 Then Let wlo1 = wlo1 - 10
+If wlo <= 0 Then Let hiz = 1
+If wlo >= 400 Then Let hiz = 0
+If a = 0 And xwin2 < -19000 And xwin > -24000 And ywin2 < 24000 And ywin > -24000 Then Let a = 1: GoTo 91
+If B = 0 And xwin > 19000 And xwin2 < 24000 And ywin2 < 24000 And ywin > -24000 Then Let B = 1: GoTo 92
+If c = 0 And xwin > -19000 And xwin2 < 24000 And ywin2 < -19000 And ywin > -24000 Then Let c = 1: GoTo 93
+If d = 0 And xwin > -19000 And xwin2 < 24000 And ywin > 19000 And ywin2 < 24000 Then Let d = 1: GoTo 94
+GoTo 90
+91
+Line (-18900, -24000)-(-24100, 24000), 0, BF
+Line (-19000, 0)-(-24000, 0), 4
+Line (-19000, wlo1)-(-24000, -24000), 10, BF
+Line (-19000, wlo)-(-24000, 24000), 10, BF
+Let y = 1
+GoTo 84
+92
+Line (18900, -24000)-(24100, 200000), 0, BF
+Line (19000, -24000)-(24000, 200000), 10, BF
+Let y = 2
+GoTo 84
+93
+Line (-24000, -18900)-(24000, -24100), 0, BF
+Line (-24000, -19000)-(24000, -24000), 10, BF
+Let y = 3
+GoTo 84
+94
+Line (24000, 18900)-(-24000, 24100), 0, BF
+Line (24000, 19000)-(-24000, 24000), 10, BF
+Let y = 4
+GoTo 84
+90
+Let a = 0
+Let B = 0
+Let c = 0
+Let d = 0
+If xcoi < -19000 And xcoi > -24000 And ycoi < wlo1 + 30 And ycoi > -24000 Then GoTo 89
+If xcoi < -19000 And xcoi > -24000 And ycoi > wlo - 30 And ycoi < 24000 Then GoTo 89
+If xcoi > 19000 And xcoi < 24000 And ycoi > -24000 And ycoi < 24000 Then GoTo 89
+If xcoi > -19000 And xcoi < 24000 And ycoi < -19000 And ycoi > -24000 Then GoTo 89
+If xcoi > -19000 And xcoi < 24000 And ycoi > 19000 And ycoi < 24000 Then GoTo 89
+GoTo 88
+89
+If exsh = 0 GoTo 14
+'Let exshd = exshd - 25: Let energy = energy - 1: Sound 37, .4: Let mxsp = mxsp - 1
+88
+'eatrh'
+Let earx = 10000
+Let eary = -2000
+If earth = 1 And xwin2 < 11000 And xwin > 9000 And ywin2 < -1000 And ywin > -3000 Then GoTo 16 Else GoTo 17
+16
+Line (10700, 1300)-(9300, 2700), 0, BF
+Circle (earx, eary), 500, 2
+Paint (earx, eary), 1, 2
+Paint (10400, moy), 1, 2
+Paint (9600, moy), 1, 2
+Paint (mox, 2400), 1, 2
+Paint (mox, 1600), 1, 2
+If xwin2 < 11000 And xwin > 9000 And ywin2 < -1000 And ywin > -3000 Then Let graf = 1
+If xwin2 < 10500 And xwin > 9500 And ywin2 < -1500 And ywin > -2500 Then Let plsh = plsh - 50 ': Sound 37, 1
+If graf = 1 And xcoi > earx Then Let mvx = -grave
+If graf = 1 And xcoi < earx Then Let mvx = grave
+If graf = 1 And ycoi > eary Then Let mvy = -grave
+If graf = 1 And ycoi < eary Then Let mvy = grave
+If graf = 1 Then Let grave = grave + 1.1
+If grave > 20 Then Let grave = 20
+If graf = 0 Then Let grave = 0
+If xcoi = earx And ycoi = eary Then GoTo 14
+17
+'ship'
+If mvy > 0 And mvx = 0 Then Circle (xcoi, ycoi), 10 + mvy, 2, , , (3.4 / (-mvy + 11)) + 1
+If mvx > 0 And mvy = 0 Then Circle (xcoi, ycoi), 10 + mvx, 2, , , (1 / mvx)
+If mvy < 0 And mvx = 0 Then Circle (xcoi, ycoi), 10 - mvy, 2, , , (3.4 / (mvy + 11)) + 1
+If mvx < 0 And mvy = 0 Then Circle (xcoi, ycoi), 10 - mvx, 2, , , (-1 / mvx)
+If mvx = 0 And mvy = 0 Then Circle (xcoi, ycoi), 10, 2
+If mvy > 0 And mvx = 0 Then Circle (xcoi + (10 + mvy), ycoi), 5 + mvy, 2, , , (3.4 / (-mvy + 11)) + 1
+If mvx > 0 And mvy = 0 Then Circle (xcoi, (10 + mvx) + ycoi), 5 + mvx, 2, , , (1 / mvx)
+If mvy < 0 And mvx = 0 Then Circle (xcoi + (-10 + mvy), ycoi), 5 - mvy, 2, , , (3.4 / (mvy + 11)) + 1
+If mvx < 0 And mvy = 0 Then Circle (xcoi, (-10 + mvx) + ycoi), 5 - mvx, 2, , , (-1 / mvx)
+If mvx = 0 And mvy = 0 Then Circle (xcoi, ycoi + 20), 5, 2
+If mvx = 0 And mvy = 0 Then Circle (xcoi, ycoi - 20), 5, 2
+If mvy > 0 And mvx = 0 Then Circle (xcoi - (10 + mvy), ycoi), 5 + mvy, 2, , , (3.4 / (-mvy + 11)) + 1
+If mvx > 0 And mvy = 0 Then Circle (xcoi, ycoi - (10 + mvx)), 5 + mvx, 2, , , (1 / mvx)
+If mvy < 0 And mvx = 0 Then Circle (xcoi - (-10 + mvy), ycoi), 5 - mvy, 2, , , (3.4 / (mvy + 11)) + 1
+If mvx < 0 And mvy = 0 Then Circle (xcoi, ycoi - (-10 + mvx)), 5 - mvx, 2, , , (-1 / mvx)
+If mvx = 0 And mvy = 0 Then Circle (xcoi + 15, ycoi), 5 + mvx + mvy, 2
+If mvx = 0 And mvy = 0 Then Circle (xcoi - 15, ycoi), 5 + mvx + mvy, 2
+If mvx <> 0 And mvy <> 0 And vly = 0 Then Circle (xcoi, ycoi), 5, 2
+If vly > 0 Then Circle (xcoi, ycoi), 10 + mvx + mvy, 2
+Paint (xcoi, ycoi), 1, 2
+'roket'
+If rok = 0 Then GoTo 20
+Let gui = 1
+Line (rokx + 30, roky + 30)-(rokx - 30, roky - 30), 0, BF
+Circle (rokx, roky), 4, 8
+Paint (rokx, roky), 8, 8
+If gui = 1 GoTo 21
+Let rokx = rokx + rokmvx
+Let roky = roky + rokmvy
+Line (rokx + 30, roky + 30)-(rokx - 30, roky - 30), 0, BF
+Circle (rokx, roky), 4, 8
+Paint (rokx, roky), 8, 8
+21
+If rkstp = 0 And rokx = xcoi And roky = ycoi Then Let ty = 0
+Let ty = ty + 1
+If rokx > prrx - 10 And roky > prry - 10 And rokx < prrx + 10 And roky < prry + 10 Then Let rsp = 1 Else Let rsp = 10
+If en = 1 Then Let prrx = cruiserx: Let prry = cruisery
+If en = 2 Then Let prrx = fiterx: Let prry = fitery
+If en = 3 Then Let prrx = enbasx: Let prry = enbasy
+If en = 4 Then Let prrx = fiterx2: Let prry = fitery2
+If en = 0 And selbmv = 1 Then Let prrx = prrx: Let prry = prry
+If prrx > rokx Then Let rokx = rokx + rsp
+Let erk = erk + 1
+If erk = 1 Then Let arny = 1 Else Let arny = 0
+If arny = 1 Then Let big = ((rokx - prrx) ^ 2 + (roky - prry) ^ 2)
+If big <> 0 Then Let ab = ((rokx - prrx) ^ 2 + (roky - prry) ^ 2) * 100 / big
+Locate 1, 1
+If dis = 1 Then Print ab
+If tyo <> 0 Then Print ((ty * 100) / tyo)
+If prrx < rokx Then Let rokx = rokx - rsp
+If prry > roky Then Let roky = roky + rsp
+If prry < roky Then Let roky = roky - rsp
+If rokx = prrx And roky = prry And en = 1 And cruisersh > 0 Then Let cruisersh = cruisersh - (roklv * 100): Let rok = 0
+If rokx = prrx And roky = prry And en = 1 And cruisersh <= 0 Then Let cruiserdm = cruiserdm + (roklv * 100): Let rok = 0
+If rokx = prrx And roky = prry And en = 2 And fitersh > 0 Then Let fitersh = fitersh + (roklv * 100): Let rok = 0
+If rokx = prrx And roky = prry And en = 2 And fitersh <= 0 Then Let fiterdm = fiterdm + (roklv * 100): Let rok = 0
+If rokx = prrx And roky = prry And en = 3 And enbsh > 0 Then Let enbsh = enbsh - (roklv * 100): Let rok = 0
+If rokx = prrx And roky = prry And en = 3 And enbsh <= 0 Then Let enbasdm = enbsdm + (roklv * 100): Let rok = 0
+If rokx = prrx And roky = prry And en = 4 And fitersh2 > 0 Then Let fitersh2 = fitersh2 - (roklv * 100): Let rok = 0
+If rokx = prrx And roky = prry And en = 4 And fitersh2 <= 0 Then Let fiterdm2 = fiterdm2 + (roklv * 100): Let rok = 0
+If rkstp = 0 And rokx = prrx And roky = prry And en = 0 Then Let rok = 0
+If rokx = enbasx And roky = enbasy Then Let enbsh = enbsh - (100 * explp)
+If ty > tyo Then Let rok = 0: GoTo 87
+If rokx = prrx And roky = prry Then Let sdkj = 1 Else GoTo 20
+If rkstp = 1 Then GoTo 20
+87
+If rokx < (100 * explp) And rokx > (-100 * explp) And roky < (100 * explp) And roky > -(100 * explp) Then Let bssh = bssh - (explp * 100)
+If exsh = 0 And rokx < xcoi + (100 * explp) And rokx > xcoi - (100 * explp) And roky < ycoi + (100 * explp) And roky > ycoi - (100 * explp) Then Let plsh = plsh - (100 * explp)
+If rokx < fiterx2 + (100 * explp) And rokx > fiterx2 - (100 * explp) And roky < fitery2 + (100 * explp) And roky > fitery2 - (100 * explp) Then Let fitersh2 = fitersh2 - (100 * explp)
+If rokx < cruiserx + (100 * explp) And rokx > cruiserx - (100 * explp) And roky < cruisery + (100 * explp) And roky > cruisery - (100 * explp) Then Let cruisersh = cruisersh - (100 * explp)
+If rokx < mox + (400 * explp) And rokx > mox - (400 * explp) And roky < moy + (400 * explp) And roky > moy - (400 * explp) Then Let moon = 0
+If earx < xcoi + (1000 * explp) And rokx > earx - (1000 * explp) And roky < eary + (1000 * explp) And roky > eary - (1000 * explp) Then Let earth = 0
+'Sound 39, 2
+'Sound 38, 3
+'Sound 37, 4
+'Sound 30000, 1
+For x = 2 To 50 * explp Step 2
+    Locate 1, 1
+    Print x * 2
+    Circle (rokx, roky), x, 4, , , .6
+Next x
+For x = 2 To 50 * explp Step 2
+    Circle (rokx, roky), x, 0, , , .6
+    Locate 1, 1
+    Print x * -2 + (100 * explp)
+Next x
+If rokx = prrx And roky = prry Then Let rok = 0
+Cls
+20
+If beam = 0 Then GoTo 100
+If en = 1 Then Let enshfr = cruiserfr
+If en = 2 Then Let enshfr = fiterfr
+If en = 3 Then Let enshfr = fiterfr2
+If en = 4 Then Let enshfr = enbasfr
+If beamfr < enshfr Then Let beam = 0: GoTo 1
+If en = 1 Then Let renx = cruiserx: Let reny = cruisery
+If en = 2 Then Let renx = fiterx: Let reny = fitery
+If en = 3 Then Let renx = fiterx2: Let reny = fitery
+If en = 4 Then Let renx = enbasx: Let reny = enbasy
+If en = 0 Then Let beam = 0: GoTo 1
+Line (xcoi, ycoi)-(renx, reny), 4, , 3
+Let a = (desenx * .01)
+Let renx = renx + a
+Let B = (deseny * .01)
+Let reny = reny + B
+If en = 1 Then Let cruiserx = renx: Let cruisery = reny
+If en = 2 Then Let fiterx = renx: Let fitery = reny
+If en = 3 Then Let fiterx2 = renx: Let fitery = reny
+If en = 4 Then Let enbasx = renx: Let enbasy = reny
+'Sound 300, 2
+100
+'base'
+If en = 0 Then Let bt = 0 Else Let bt = 1
+If enat = 1 Then Let bt = 1
+If bt = 1 And batst = 1 Then Let batst = 1
+If batst = 0 And bt = 1 Then Let batst = 1
+If bt = 0 And batst = 1 Then Let batst = 0
+If batst = 1 Then Let bsen = bsen + 2.5
+If batst = 0 Then Let bsen = bsen + 7.5
+Let bssh = bssh + (5 * (bsen / 1200))
+If batst = 1 Then Let res = res + 1
+If batst = 0 Then Let res = res + 5
+If bsen < 10 And res > 100 Then Let res = res - 100: Let bsen = bsen + 200
+If keel = 22 Then Let bssh = 200
+If bssh > 1200 And batst = 1 Then Let bssh = 1200
+If bssh > 200 And batst = 0 Then Let bssh = 200
+If bsdm > 99 Then GoTo 40
+If bsen > mxen Then Let bsen = mxen
+If bsen < 1 Then GoTo 40
+If bssh < 1 Then GoTo 40
+If xwin2 < 600 And xwin > -600 And ywin2 < 600 And ywin > -600 Then Let qqq = 1 Else GoTo 22
+If mvx = 0 And mvy = 0 Then Let x = 1 Else Line (600, 600)-(-600, -600), 0, BF
+Line (20, 200)-(-20, 300), 2, BF
+Line (20, -200)-(-20, -300), 2, BF
+Line (150, 20)-(250, -20), 2, BF
+Line (-150, 20)-(-250, -20), 2, BF
+Circle (0, 0), 150, 1
+Circle (0, 400), 75, 1
+Circle (0, -400), 75, 1
+Circle (325, 0), 75, 1
+Circle (-325, 0), 75, 1
+Paint (0, 0), 2, 1
+Paint (0, 400), 2, 1
+Paint (0, -400), 2, 1
+Paint (325, 0), 2, 1
+Paint (-325, 0), 2, 1
+If batst = 1 Then GoTo 76
+GoTo 77
+76
+Line (10, 210)-(-10, 290), 8, BF
+Line (10, -210)-(-10, -290), 8, BF
+Line (160, 10)-(240, -10), 8, BF
+Line (-160, 10)-(-240, -10), 8, BF
+Circle (0, 0), 20, 0
+Circle (0, 400), 10, 0
+Circle (0, -400), 10, 0
+Circle (325, 0), 10, 0
+Circle (-325, 0), 10, 0
+Paint (0, 0), 8, 0
+Paint (0, 400), 8, 0
+Paint (0, -400), 8, 0
+Paint (325, 0), 8, 0
+Paint (-325, 0), 8, 0
+GoTo 78
+77
+Line (10, 210)-(-10, 290), 1, BF
+Line (10, -210)-(-10, -290), 1, BF
+Line (160, 10)-(240, -10), 1, BF
+Line (-160, 10)-(-240, -10), 1, BF
+Circle (0, 0), 20, 0
+Circle (0, 400), 10, 0
+Circle (0, -400), 10, 0
+Circle (325, 0), 10, 0
+Circle (-325, 0), 10, 0
+Paint (0, 0), 1, 0
+Paint (0, 400), 1, 0
+Paint (0, -400), 1, 0
+Paint (325, 0), 1, 0
+Paint (-325, 0), 1, 0
+For x = 210 To 290 Step 10
+    Line (10, x)-(-10, x), 0
+    Line (10, -x)-(-10, -x), 0
+Next x
+For x = 160 To 240 Step 10
+    Line (x, 10)-(x, -10), 0
+    Line (-x, 10)-(-x, -10), 0
+Next x
+78
+If enat = 0 Then GoTo 22
+If autodef = 0 Then GoTo 22
+Let lsp = lsp + 1
+If lsp > 200 Then Let lsp = 0
+'If lsp = 170 Then For x = 300 To 700: Sound x, .5: Next x
+If lsp = Not 10 And lsp = Not 30 And lsp = Not 50 And lsp = Not 70 And lsp = Not 90 And lsp = Not 110 And lsp = Not 130 And lsp = Not 150 Then GoTo 22
+Line (0, 400)-(fiterx, fitery), 4
+If fitersh > 0 Then Let fitersh = fitersh - 5 Else Let fiterdm = fiterdm + 2.5
+'Sound 2000, .3
+'Sound 30000, .7
+Line (0, 400)-(fiterx, fitery), 0
+Line (325, 0)-(fiterx, fitery), 4
+If fitersh > 0 Then Let fitersh = fitersh - 5 Else Let fiterdm = fiterdm + 2.5
+'Sound 2000, .3
+'Sound 30000, .7
+Line (325, 0)-(fiterx, fitery), 0
+Line (0, -400)-(fiterx, fitery), 4
+If fitersh > 0 Then Let fitersh = fitersh - 5 Else Let fiterdm = fiterdm + 2.5
+'Sound 2000, .3
+'Sound 30000, .7
+Line (0, -400)-(fiterx, fitery), 0
+Line (-325, 0)-(fiterx, fitery), 4
+If fitersh > 0 Then Let fitersh = fitersh - 5 Else Let fiterdm = fiterdm + 2.5
+'Sound 2000, .3
+'Sound 30000, .7
+Line (-325, 0)-(fiterx, fitery), 0
+If lsp = Not 150 Then GoTo 22
+Line (0, 0)-(fiterx, fitery), 4
+If fitersh > 0 Then Let fitersh = fitersh - 25 Else Let fiterdm = fiterdm + 25
+For x = 1 To 20
+    'Sound 2000, .3
+    'Sound 30000, .7
+Next x
+Line (0, 0)-(fiterx, fitery), 0
+22
+'enbase'
+If enbas = 0 Then GoTo 36
+Let enbsh = enbsh + (.5 * enbaslv)
+If enbsh < 0 Then Let enbsh = 0
+If enbsdm > 99 Then GoTo 41
+If enbsh > lsenbsh Then Let enbsh = lsenbsh
+If xcoi < 600 + enbasx And ycoi < 600 + enbasy And xcoi > enbasx - 600 And ycoi > enbasy - 600 Then Let atat = 1: Let en = 3: GoTo 37 Else GoTo 36
+37
+Let en = 3
+Line (600 + enbasx, 600 + enbasy)-(enbasx - 600, enbasy - 600), 0, BF
+Line (enbasx + 20, enbasy + 200)-(enbasx - 20, enbasy + 300), 4, BF
+Line (enbasx + 20, enbasy - 200)-(enbasx - 20, enbasy - 300), 4, BF
+Line (enbasx + 150, enbasy + 20)-(enbasx + 250, enbasy - 20), 4, BF
+Line (enbasx - 150, enbasy + 20)-(enbasx - 250, enbasy - 20), 4, BF
+Circle (enbasx, enbasy), 150, 8
+Circle (enbasx, enbasy + 400), 75, 8
+Circle (enbasx, enbasy - 400), 75, 8
+Circle (enbasx + 325, enbasy), 75, 8
+Circle (enbasx - 325, enbasy), 75, 8
+Paint (enbasx, enbasy), 8, 8
+Paint (enbasx, enbasy + 400), 8, 8
+Paint (enbasx, enbasy - 400), 8, 8
+Paint (enbasx + 325, enbasy), 8, 8
+Paint (enbasx - 325, enbasy), 8, 8
+If atat = 0 Then GoTo 36
+Let enbasfr = Int(Rnd(1) * mxenbasfr + 0)
+If enbasfr > mxenbasfr Then Let enbasfr = mxenbasfr
+Let lspe = lspe + 1
+If lspe > (50 - enbaslv) Then Let lspe = 0
+If lspe = Not 0 Then GoTo 36
+If embasfr < shfr Then Let enbasfr = enbasfr + 1
+If embasfr > shfr Then Let enbasfr = enbasfr - 1
+If enbasfr > mxenbasfr Then Let enbasfr = mxenbasfr
+Line (enbasx, 400 + enbasy)-(xcoi, ycoi), 4
+If exsh = 0 And enbasfr = shfr And plsh > 0 Then Let plsh = plsh - (.5 + enbaslv)
+If exsh = 0 And enbasfr = shfr And plsh <= 0 Then Let pldm = pldm + 2.5 + enbaslv
+'Sound 2000, .3
+'Sound 30000, .7
+Line (enbasx, 400 + enbasy)-(xcoi, ycoi), 0
+Line (enbasx, enbasy - 400)-(xcoi, ycoi), 4
+If exsh = 0 And enbasfr = shfr And plsh > 0 Then Let plsh = plsh - (.5 + enbaslv)
+If exsh = 0 And enbasfr = shfr And plsh <= 0 Then Let pldm = pldm + 2.5 + enbaslv
+'Sound 2000, .3
+'Sound 30000, .7
+Line (enbasx, enbasy - 400)-(xcoi, ycoi), 0
+Line (400 + enbasx, enbasy)-(xcoi, ycoi), 4
+If exsh = 0 And enbasfr = shfr And plsh > 0 Then Let plsh = plsh - (.5 + enbaslv)
+If exsh = 0 And enbasfr = shfr And plsh <= 0 Then Let pldm = pldm + 2.5 + enbaslv
+'Sound 2000, .3
+'Sound 30000, .7
+Line (400 + enbasx, enbasy)-(xcoi, ycoi), 0
+Line (enbasx - 400, enbasy)-(xcoi, ycoi), 4
+If exsh = 0 And enbasfr = shfr And plsh > 0 Then Let plsh = plsh - (.5 + enbaslv)
+If exsh = 0 And enbasfr = shfr And plsh <= 0 Then Let pldm = pldm + 2.5 + enbaslv
+'Sound 2000, .3
+'Sound 30000, .7
+Line (enbasx - 400, enbasy)-(xcoi, ycoi), 0
+
+36
+'fiter1'
+If fiter = 0 Then GoTo 12
+Let fitersp = 20
+Let fitersh = fitersh + (lsfitersh / 200) + fiterlv
+If fitersh > lsfitersh Then Let fitersh = lsfitersh
+If fiterdm > 200 Then GoTo 23
+If fiterx > 300 Then Let fiterx = fiterx - fitersp
+If fiterx < -300 Then Let fiterx = fiterx + fitersp
+If fitery > 300 Then Let fitery = fitery - fitersp
+If fitery < -300 Then Let fitery = fitery + fitersp
+If fiterx < 500 And fiterx > -500 And fitery < 500 And fitery > -500 Then Let enat = 1: Let fiterat = 1
+If fiterx < xwin And fiterx > xwin2 And fitery < ywin And fitery > ywin2 And plmode = 0 Then Circle (fiterx, fitery), 10, 4: Paint (fiterx, fitery), 4, 4
+If fiterat = 0 Then GoTo 12
+If fiterx < xwin And fiterx > xwin2 And fitery < ywin And fitery > ywin2 And plmode = 0 Then Let ftprx = xcoi: Let ftpry = ycoi: Let en = 2 Else Let ftprx = 0: Let ftpry = 0
+Let lssp = lssp + 1
+If lssp > 21 - fiterlv Then Let lssp = 0
+If lssp < 0 Then Let lssp = 0
+If lssp = 0 Then Let fir = 1
+If fir <> 0 Then GoTo 12
+Let prsh = prsh - 20
+If ftpry = xcoi And plsh > 0 Then Let plsh = plsh - (15 + fiterlv)
+If ftpry = xcoi And plsh < 0 Then Let pldm = pldm + 15 + fiterlv
+If ftpry = 0 And bssh > 0 Then Let bssh = bssh - (15 + fiterlv)
+If ftpry = 0 And bssh < 0 Then Let bsdm = bsdm + 15 + fiterlv
+Line (fiterx, fitery)-(ftprx, ftpry), 4
+'Sound 37, .1
+'Sound 30000, .9
+Line (fiterx, fitery)-(ftprx, ftpry), 0
+12
+'fiter2'
+If fiter2 = 0 Then GoTo 42
+Let fitersp2 = 20
+Let fitersh2 = fitersh2 + (lsfitersh / 200) + fiterlv2
+If fitersh2 > lsfitersh2 Then Let fitersh2 = lsfitersh2
+If fiterdm2 > 600 Then GoTo 43
+If fiterx2 > xcoi + 150 Then Let fiterx2 = fiterx2 - fitersp2
+If fiterx2 < xcoi Then Let fiterx2 = fiterx2 + fitersp2
+If fitery2 > ycoi Then Let fitery2 = fitery2 - fitersp2
+If fitery2 < ycoi Then Let fitery2 = fitery2 + fitersp2
+If fiter2 = 1 And fiterx2 < xcoi + 200 And fiterx2 > xcoi - 200 And fitery2 < ycoi + 200 And fitery2 > ycoi - 200 Then Let fiterat2 = 1
+If fiterx2 < xcoi + 500 And fiterx2 > xcoi - 500 And fitery2 < ycoi + 500 And fitery2 > ycoi - 500 Then Circle (fiterx2, fitery2), 10, 4, , , 1: Paint (fiterx2, fitery2), 4, 4: Let en = 4: Let fitera2 = 1: Line (fiterx2 - 100, fitery2 + 100)-(fiterx2 + 100, fitery2 - 100), 0, BF
+If fiterat2 = 0 Then GoTo 42
+If en <> 4 Then GoTo 42
+If fiterx2 < xcoi + 200 And fiterx2 > xcoi - 200 And fitery2 < ycoi + 200 And fitery2 > ycoi - 200 Then Let ftprx2 = xcoi: Let ftpry2 = ycoi: Let en = 4
+Let lssp2 = lssp2 + 1
+If lssp2 > 15 - fiterlv Then Let lssp2 = 0
+If lssp2 = 0 Then Let fir2 = 0
+If lssp2 <> 0 Then Let fir2 = 1
+If fir <> 0 Then Let fiterfr2 = Int(Rnd(1) * mxfiterfr2 + 1)
+If fiterfr2 > mxfiterfr2 Then Let fiterfr2 = mxfiterfr2
+If fir2 <> 0 Then GoTo 42
+Let fiterfr2 = shfr: If fiterfr2 > mxfterfr2 Then Let fiterfr2 = mxfiterfr2
+If exsh = 0 And fiterfr2 = shfr Then Let plsh = plsh - 75 + fiterlv2 Else Let exshd = exshd - 25
+Line (fiterx2, fitery2)-(xcoi, ycoi), 2
+'Sound 37, .5
+'Sound 30000, .5
+Line (fiterx2, fitery2)-(xcoi, ycoi), 0
+If bl = 1 Then Line (s, t)-(s - 20, t - 20), 14, BF: Line (s + 20, t + 20)-(s - 60, t - 60), 0, BF
+42
+'cruiser'
+If cruiser = 0 Then GoTo 25
+If kiz = 0 Then Let cprx = xcoi + 200: Let cpry = ycoi + 200: Let csp = 20
+If kiz = 1 Then Let cprx = xcoi + 200: Let cpry = ycoi: Let csp = 20: Let en = 1
+If kiz = 2 Then Let cprx = enbasx: Let cpry = enbasy: Let csp = 20
+If cruiserx < xcoi + 500 And cruisery < ycoi + 500 And cruiserx > xcoi - 500 And cruisery > ycoi - 500 Then Let kiz = 1
+If cruiserx < xcoi + 500 And cruisery < ycoi + 500 And cruiserx > xcoi - 500 And cruisery > ycoi - 500 Then Let kiz = 1 Else If cruiserdm < 50 Then Let kiz = 0
+If cruiserdm > 10 Then Let kiz = 2
+If cruiserx < cprx Then Let cruiserx = cruiserx + csp
+If cruiserx > cprx Then Let cruiserx = cruiserx - csp
+If cruisery < cpry Then Let cruisery = cruisery + csp
+If cruisery > cpry Then Let cruisery = cruisery - csp
+Let cruisersh = cruisersh + (lscruisersh / 200) + cruiserlv
+Let cruiserdm = cruiserdm - (.5 + cruiserlv)
+If cruiserdm <= 0 Then Let cruiserdm = 0
+If cruisersh > lscruisersh Then Let cruisersh = lscruisersh
+If cruiserdm > 100 Then GoTo 26
+If cruiserdm = 50 Then Let kiz = 2
+If kiz = 0 Then GoTo 25
+Line (cruiserx + 100, cruisery + 800)-(cruiserx - 100, cruisety - 800), 0, BF
+Circle (cruiserx, cruisery), 300, 8, , , 4
+Circle (cruiserx, cruisery), 30, 8
+Circle (cruiserx, cruisery - 300), 30, 8
+Circle (cruiserx, cruisery + 300), 30, 8
+Paint (cruiserx + 50, cruisery), 4, 8
+Paint (cruiserx, cruisery), 8, 8
+Paint (cruiserx, cruisery - 300), 8, 8
+Paint (cruiserx, cruisery + 300), 8, 8
+Let spls = spls + 1
+If cruiserfr < shfr Then Let cruiserfr = cruiserfr + 1
+If cruiserfr > shfr Then Let cruiserfr = cruiserfr - 1
+If cruiserfr > mxcruiserfr Then Let cruiserfr = mxcruiserfr
+If spls = 27 - (cruiserlv / 4) Then Let spls = 0
+If spls = 0 Then GoTo 29
+If spls = 3 Then GoTo 27
+If spls = 6 Then GoTo 28
+If spls = 9 Then GoTo 29
+If spls = 12 Then GoTo 27
+If spls = 15 Then GoTo 28
+If spls = 18 Then GoTo 29
+If spls = 21 Then GoTo 27
+If spls = 24 Then GoTo 28
+If spls = 26 Then GoTo 60
+Let cruiserfr = Int(Rnd(1) * mxcruiserfr + 1)
+If cruiserfr > mxcruiserfr Then Let cruiserfr = mxcruiserfr
+GoTo 25
+
+27
+Line (cruiserx, cruisery)-(xcoi, ycoi), 4
+'Sound 3000, .5
+If exsh = 0 And cruiserfr = shfr Then Let plsh = plsh - (15 + cruisrerlv)
+If exsh = 1 Then Let exshd = exshd - (5 * cruiserlv)
+Line (cruiserx, cruisery)-(xcoi, ycoi), 0
+GoTo 25
+28
+Line (cruiserx, cruisery - 300)-(xcoi, ycoi), 4
+'Sound 3000, .5
+If exsh = 0 And cruiserfr = shfr Then Let plsh = plsh - (15 + cruisrerlv)
+If exsh = 1 Then Let exshd = exshd - (5 * cruiserlv)
+Line (cruiserx, cruisery - 300)-(xcoi, ycoi), 0
+GoTo 25
+29
+Line (cruiserx, cruisery + 300)-(xcoi, ycoi), 4
+'Sound 3000, .5
+If exsh = 0 And cruiserfr = shfr Then Let plsh = plsh - (15 + cruisrerlv)
+If exsh = 1 Then Let exshd = exshd - (5 * cruiserlv)
+Line (cruiserx, cruisery + 300)-(xcoi, ycoi), 0
+GoTo 25
+60
+Line (cruiserx, cruisery)-(xcoi, ycoi), 4
+For x = 1 To 10
+    '    Sound 3000, .5
+    '   Sound 30000, .5
+Next x
+If exsh = 0 Then Let plsh = plsh - (75 + cruisrerlv) Else Let exshd = exshd - (50 * cruiserlv)
+Line (cruiserx, cruisery)-(xcoi, ycoi), 0
+GoTo 25
+
+25
+'dok2
+If dok2 = 0 Then GoTo 116
+Line (325 + ae3, -70)-(325 + ae3, -100), 0
+Line (325 + ae3, 130)-(325 + ae3, 100), 0
+Let ae3 = ((ae * 100) / ae2) * 2
+Let ae = ae + 1
+Line (325 + ae3, -100)-(525, 100), 1, BF
+Circle (425, 100), 100, 8, 0, 3.2, .2
+Line (325 + ae3, 100)-(325 + ae3, 130), 8
+Line (325, 100)-(525, 100), 8
+If ae3 > 5 Then Paint (330, 103), 2, 8
+If ae3 < 95 Then Paint (520, 103), 1, 8
+If mvx <> 0 Then Let dok2 = 0
+If mvy <> 0 Then Let dok2 = 0
+If en = Not 0 Then Let dok2 = 0
+If dok = 1 Then Let dok2 = 0
+If exsh = 1 Then Let dok2 = 0
+If ae = ae2 Then Let dok2 = 0
+Let shplv = shplv + .05
+Let laserlv = laserlv + .05
+Let roklv = roklv + .05
+Let mxsh = mxsh + 1
+Let mxen = mxen + 1.5
+Let exshl = exshl + .05
+Line (325, -100)-(325 + ae3, 100), 2, BF
+Circle (425, -100), 100, 8, 0, 3.2, .2
+Line (325 + ae3, -100)-(325 + ae3, -70), 8
+Circle (325, 0), 10, 0
+Paint (325, 0), 1, 0
+If dok2 = 0 Then Cls
+116
+If docking = 1 Then GoTo 115
+'dok
+If dok = 0 Then GoTo 7
+For x = -5 To 5
+    Line (325, x)-(xcoi, ycoi + x), 8
+Next x
+5
+Let ae = ae + 1: If ae > 5 Then Let ae = 1
+If ae > 1 Then GoTo 7
+For x = -5 To 5
+    Line (325, x)-(xcoi, ycoi + x), 1
+Next x
+Let yo = 0
+If mvx <> 0 Then Let dok = 0
+If mvy <> 0 Then Let dok = 0
+If exsh = 1 Then Let dok = 0
+If bsen < 10 Then Print "bsen low!": GoTo 7
+If en <> 0 And autorok = 1 Then Let pt = 1
+If en <> 0 And autorok = 1 Then Let pt = 1
+If energy < mxen Then Let energy = energy + 20: Let yo = yo + 1
+If plsh < mxsh Then Let plsh = plsh + 20: Let yo = yo + 1
+If pldm > 1 Then Let pldm = pldm - .5: Let yo = yo + 1
+If trsen < 99 Then Let trsen = trsen + 5: Let yo = yo + 1
+If trsen > 90 Then Let trsen = 90: Let yo = yo - 1
+If roket < 10 Then Let roket = roket + 1: Let yo = yo + 1
+If fuelt < 5 Then Let fuelt = fuelt + 1: Let yo = yo + 1
+If exsha < 2 Then Let exsha = exsha + 1: Let yo = yo + 1
+If yo > 1 Then Let bsen = bsen - (yo * .5)
+'If yo > 0 Then Sound 300, 1
+If yo < 1 Then Let dok = 0
+If yo = 1 Then Let mxsp = 0
+7
+If viz = 0 Then Let erx = mox + 400: Let ery = moy
+If viz = 1 Then Let erx = 0: Let ery = 0
+If sorx > mox - 10 And sorx < mox + 10 And sory > moy - 10 And sory < moy + 10 Then Let tpe = 1 Else Let tpe = 20
+If erx > sorx Then Let sorx = sorx + tpe
+If erx < sorx Then Let sorx = sorx - tpe
+If ery > sory Then Let sory = sory + tpe
+If ery < sory Then Let sory = sory - tpe
+Line (sorx - tpe - 10, sory - tpe - 10)-(sorx + tpe + 10, sory + tpe + 10), 0, BF
+Circle (sorx, sory), 5, 1
+Paint (sorx, sory), 14, 1
+'If sorx = erx And sory = ery Then Let viz = viz + 1: Sound 2000, .2: Play "o3l16cdedc"
+If viz = 2 Then Let bsen = bsen + 600
+If bsen > 1200 Then Let res = res + 50: Let bsen = 1200
+If viz = 2 Then Let viz = 0
+GoTo 1
+
+2
+Let bl = 1
+Line (s, s)-(s - 20, 2 - 20), 0, BF
+Let s = Int(Rnd(1) * 10000 + -5000)
+Let t = Int(Rnd(1) * 10000 + -5000)
+Line (s, t)-(s - 20, t - 20), 14, BF
+Let cerdit = cerdit + ((200 * heer))
+GoTo 1
+4
+If mvx <> 0 Then GoTo 1
+If mxy <> 0 Then GoTo 1
+If en <> 0 Then Print "gevaar": GoTo 1
+If xcoi > 0 And ycoi > -500 And xcoi < 725 And ycoi < 500 Then Let a = 0 Else Print "te ver": GoTo 1
+Let cx = xcoi
+Let cy = ycoi
+If cy = 0 GoTo 96
+If cy < 0 Then Let a = -.5
+If cy > 0 Then Let a = .5
+For x = 0 To cy Step a
+    Line (325, 0)-(325, x), 4
+Next x
+96
+If cx = 325 GoTo 97
+If cx < 325 Then Let a = -.5
+If cx > 325 Then Let a = .5
+For x = 325 To cx Step a
+    Line (325, 0)-(x, 0), 4
+Next x
+97
+If cx = 325 GoTo 98
+If cx < 325 Then Let a = -.5
+If cx > 325 Then Let a = .5
+For x = 325 To cx Step a
+    Line (325, cy)-(x, cy), 4
+Next x
+98
+If cy = 0 GoTo 99
+If cy < 0 Then Let a = -.5
+If cy > 0 Then Let a = .5
+For x = 0 To cy Step a
+    Line (cx, 0)-(cx, x), 4
+Next x
+99
+Locate 1, 1
+Print "docking complete"
+'Sound 2000, 1
+Let dok = 1
+GoTo 55
+8
+Let mxsp = mxsp + 1
+If mxsp > shplv * 2 + 10 Then Let mxsp = shplv * 2 + 10
+If mxsp > 50 Then Let mxsp = 50
+GoTo 56
+9
+Let ex = ex + 1
+Let mvx = mvx - ex
+Let mvy = mvy - ex
+If mvy < 10 And mvx < 10 Then Let vly = 0
+Cls
+GoTo 1
+10
+For a = 1 To 20
+    Let x = Int(Rnd(1) * 1000 + -500)
+    Paint (x, -x), 1, 7
+Next a
+For a = 1 To 10000
+    Let x = Int(Rnd(1) * 1000 + -500)
+    Let y = Int(Rnd(1) * 1000 + -500)
+    If a < 1000 Then Circle (x, y), 20, 0
+    Paint (x, y), 0, 0
+Next a
+Cls
+14
+For a = 1 To 200
+    Circle (xcoi, ycoi), a, 4
+Next a
+For a = 1 To 200 Step 2
+    Circle (xcoi, ycoi), a, 14
+Next a
+'Sound 37, 1
+GoTo 1111
+15
+Cls
+If trsen < 100 Then Print "even wachten": Sleep: GoTo 1
+Print " wat wilt u trans porteren?"
+Print "(1)ship (2) roket "
+Input wat
+Print " max + "; shplv * 100 + 200
+Let ai = shplv * 100 + 200
+Input "x"; xpl
+Input "y"; ypl
+If wat = 0 GoTo 1
+If wat > 3 Then GoTo 1
+If xpl = 123123 And ypl = 321321 Then Let player = 1: GoTo 53
+If xpl > shplv * 100 + 200 Then Let xpl = shplv * 100 + 200
+If xpl < (-1 * (shplv * 100 + 200)) Then Let xpl = (-1 * (shplv * 100 + 200))
+If ypl < (-1 * (shplv * 100 + 200)) Then Let xpl = (-1 * (shplv * 100 + 200))
+If ypl > shplv * 100 + 200 Then Let xpl = shplv * 100 + 200
+Let energy = energy - (.25 * mxen)
+If wat = 1 Then Let xcoi = xcoi + xpl: Let ycoi = ycoi + ypl
+If wat = 1 Then Let xwin = xcoi + 500: Let ywin = ycoi + 500
+If wat = 1 Then Let xwin2 = xcoi - 500: Let ywin2 = ycoi - 500
+If wat = 2 Then Let rokx = rokx + xpl: Let roky = roky + ypl
+Play "o3l64cdefgfedc"
+Let trsen = 0
+Cls
+GoTo 1
+6
+If roket < 1 Then GoTo 54
+If rok = 1 Then GoTo 54
+If mvx > 10 Then GoTo 54
+If mvy > 10 Then GoTo 54
+If mvx < -10 Then GoTo 54
+If mvy < -10 Then GoTo 54
+If en = 0 Then GoTo 75
+Let rok = rok + 1
+If rok = 2 Then Let rok = 0
+Let tyo = 20000
+Let ty = 0
+Let selmv = 0
+Let roket = roket - 1
+Let rokx = xcoi
+Let roky = ycoi
+Let explp = 2
+Let rokmvx = mvx: Let rokmvy = mvy
+GoTo 54
+23
+For a = 1 To 200
+    Circle (fiterx, fitery), a, 14
+Next a
+For a = 1 To 200 Step 2
+    Circle (fiterx, fitery), a, 4
+Next a
+'Sound 37, 4
+'Sound 38, 2
+'Sound 39, 1
+For x = 2 To 200
+    Circle (fiterx, fitery), x, 4, , , .6
+    Circle (fiterx, fitery), x - 1, 0, , , .6
+Next x
+Circle (fiterx, fitery), 200, 0, , , .6
+'Sound 40, 1
+
+Let cerdit = cerdit + 200
+Let enat = 0
+Let fiterx = enbasx: Let fitery = enbasy
+Let fitersh = lsfitersh + 100: Let fiterdm = 0
+Let lsfitersh = fitersh
+Let en = 0: Let enat = 0
+Let fiterat = 0
+Let fiterlv = fiterlv + 1
+Let fiterfr = fiterfr + 2
+If fitervl > 10 Then Let fiterlv = 10
+GoTo 1
+26
+For a = 1 To 80
+    Let x = Int(Rnd(1) * 100 + -50)
+    Let y = Int(Rnd(1) * 800 + -400)
+    For B = 1 To 10
+        Circle (x + cruiserx, y + cruisery), B, 4
+    Next B
+    For B = 1 To 10
+        Circle (x + cruiserx, y + cruisery), B, 0
+    Next B
+    '    Sound 37, 1
+    'Sound 30000, .5
+Next a
+For x = 2 To 300
+    Circle (cruiserx, cruisery), x, 4, , , 4
+    Circle (cruiserx, cruisery), x - 1, 0, , , 4
+Next x
+Circle (cruiserx, cruisery), 200, 0, , , 4
+'Sound 40, 3
+
+
+Let cerdit = cerdit + 2600
+If enbas = 1 Then Let cruiser = 1: Let cruisx = enbasx: Let cruisery = enbasy: Let en = 0: Let cruisersh = lscruisersh + 200: Let lscruisersh = cruisersh: Let cruiserdm = 0: Let cruiserlv = cruiserlv + 1: If cruiserlv > 10 Then Let cruiserlv = 10: Let cruiserfr = cruiserfr + 4: GoTo 1
+Let cruiser = 0
+Let en = 0
+Let cruiserdm = 0
+Let cruisersh = lscruisersh + 200
+Let lscruisersh = cruisersh
+Let keel = 0
+GoTo 1
+30
+If en = 1 And lasfr <> cruiserfr Then GoTo 56
+If en = 2 And lasfr <> fiterfr Then GoTo 56
+If en = 3 And lasfr <> fiterfr2 Then GoTo 56
+If en = 4 And lasfr <> enbasfr Then GoTo 56
+If en = 0 Then GoTo 56
+If en = 0 Then GoTo 56
+If en = 6 Then GoTo 56
+If en = 5 Then GoTo 56
+If en = 1 Then Let x = Int(Rnd(1) * 800 + -400)
+If en = 1 Then Let hpy = (x + cruisery): Let hpx = cruiserx
+If en = 2 Then Let hpx = fiterx: Let hpy = fitery
+If en = 4 Then Let hpx = fiterx2: Let hpy = fitery2
+If en = 3 Then Let hpx = Int(Rnd(1) * (500 + enbasx) + (-250 + enbasx))
+If en = 3 Then Let hpy = Int(Rnd(1) * (500 + enbasy) + (-250 + enbasy))
+If en = 1 And cruisersh > 0 Then Let cruisersh = cruisersh - (50 * laserlv)
+If en = 2 And fitersh > 0 Then Let fitersh = fitersh - (50 * laserlv)
+If en = 4 And fitersh2 > 0 Then Let fitersh2 = fitersh2 - (50 * laserlv)
+If en = 3 And enbsh > 0 Then Let enbsh = enbsh - (25 * laserlv)
+If en = 1 And cruisersh < 1 Then Let cruiserdm = cruiserdm + (50 * laserlv)
+If en = 2 And fitersh < 1 Then Let fiterdm = fitersdm + (50 * laserlv)
+If en = 4 And fitersh2 < 1 Then Let fiterdm2 = fiterdm2 + (50 * laserlv)
+If en = 3 And enbsh <= 1 Then Let enbsdm = enbsdm + (25 * laserlv)
+For x = 1 To 10
+    Line (xcoi, ycoi)-(hpx, hpy), 14
+    '    Sound 3700, .1
+    '   Sound 30000, .9
+    Line (xcoi, ycoi)-(hpx, hpy), 0
+Next x
+Let energy = energy - 5
+Let j = 0: Let rej = 1
+GoTo 56
+40
+For z = 1 To 90
+    Let x = Int(Rnd(1) * 800 + -400)
+    Let y = Int(Rnd(1) * 800 + -400)
+    For a = 1 To 10
+        Circle (x, y), a, 4
+    Next a
+    For a = 1 To 10
+        Circle (x, y), a, 0
+    Next a
+    '    Sound 37, .5
+    'Sound 30000, .5
+Next z
+Let bs = 0
+GoTo 1111
+41
+For z = 1 To 90
+    Let x = Int(Rnd(1) * 800 + -400)
+    Let y = Int(Rnd(1) * 800 + -400)
+    For a = 1 To 10
+        Circle (x + enbasx, y + enbasy), a, 4
+    Next a
+    For a = 1 To 10
+        Circle (x + enbasx, y + enbasy), a, 0
+    Next a
+    Let cerdit = cerdit + 200
+    '    Sound 37, .5
+    'Sound 30000, .5
+Next z
+Let j = 0
+Let enbaslv = enbaslv + 1
+Let enbasfr = enbasfr + 10
+If enbaslv > 10 Then Let enbaslv = 10
+Let enbasx = Int(Rnd(1) + 48000 + -24000)
+Let enbasy = Int(Rnd(1) + 48000 + -24000)
+Let enbsh = lsenbsh + 500
+Let lsenbsh = enbsh
+Let enbsdm = 0
+GoTo 1
+39
+Cls
+Print "ллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллл"
+Print "л                          RAPPORT   "
+Print "л"
+Print "л de tijd ="; min; ": 00"
+Print "л"
+Print "л De datum ="; heer; "-"; mon; "-"; jaar; "damage"; pldm
+Print "л"
+Print "л U bent op"; xcoi; "x"; ycoi; "y, u kunt over"; -trsen + 100; "sec weer beamen"
+Print "л"
+Print "л energy="; energy; "shield="; plsh; "speed="; mvx + mvy; " "
+Print "л"
+Print "л mxenergy="; mxen; "mxshield="; mxsh; "mxspeed="; mxsp; "    "
+Print "л"
+Print "л shiplv="; shplv; "roketlv ="; roklv; "laserlv="; laserlv; ""
+Print "л"
+Print "л U heeft"; cerdit; "$,en op u spaarekening"; gespbed; "$"
+Print "л  "
+Print "л U heeft"; roket; "rokets en"; fuelt; "fueltanks over"
+Print "л"
+Print "л base energy="; bsen; "base shield"; bssh; "base damage"; bsdm
+Print "л"
+Print "л earth(x)"; earx; "earth(y)"; eary
+Print "л"
+Print "л extrashields"; exsha; "extrashieldlv"; exshl; "hieldhold"; exshd
+
+Sleep
+If player <> 1 Then Cls: GoTo 1
+Cls
+Print "ллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллл"
+Print "л                        secret RAPORT   "
+Print "л"
+Print "л pincode ="; pinnum; ""
+Print "л"
+Print "л cruiser"; cruiserx; "(x)"; cruisery; "(y)"; cruiserlv; "(lv)"
+Print "л"
+Print "л fiter"; fiterx; "(x)"; fitery; "(y)"; fiterlv; "(lv)"
+Print "л"
+Print "л fiter2"; fiterx2; "(x)"; fitery2; "(y)"; fiterlv2; "(lv)"
+Print "л"
+Print "л enbas"; enbasx; "(x)"; enbasy; "(y)"; enbaslv; "(lv)"
+Print "л"
+Print "л shield"; cruisersh; "(crui)"; fitersh; "(fit)"; fitersh2; "(fit2)"; enbsh; "(enbs)"
+Print "л"
+Print "л damage"; cruiserdm; "(crui)"; fiterdm; "(fit)"; fiterdm2; "(fit2)"; enbsdm; "(enbs)"
+Print "л"
+Print "л  s"; s; "t"; t
+Print "л"
+If InKey$ = "`" Then GoTo 86
+Sleep
+Cls
+GoTo 1
+43
+For a = 1 To 200
+    Circle (fiterx2, fitery2), a, 14
+Next a
+For a = 1 To 200 Step 2
+    Circle (fiterx2, fitery2), a, 4
+Next a
+'Sound 37, 1
+'Sound 37, 1
+'Sound 37, 1
+Let cerdit = cerdit + 800
+If enbas = 0 Then Let fiter2 = 0: GoTo 1
+Let fiterx2 = enbasx: Let fitery2 = enbasy
+Let fitersh2 = lsfitersh2 + 100: Let fiterdm2 = 0
+Let lsfitersh2 = fitersh2
+Let fiterlv2 = fiterlv2 + 1
+Let fiterfr2 = fiterfr2 + 4
+If fiterlv2 > 10 Then Let fiterlv2 = 10
+Let en = 0
+GoTo 1
+45
+Cls
+If dok = 0 And multicom = 0 GoTo 1 Else GoTo 67
+49
+Print "wat wilt u?"
+Print "(1) vooraad menu"
+Print "(2) machines menu"
+Input a
+If a = 1 Then GoTo 102
+If a = 3 Then GoTo 103
+103
+Print "wilt u roket kopen(200)(1) ?"
+Input B$
+If B$ = "q" Then GoTo 67
+If B$ = "k" Then GoTo 104
+Print "wilt u exshield's kopen(500)(1) ?"
+Input i$
+If i$ = "q" Then GoTo 67
+If i$ = "k" Then GoTo 104
+Print "wilt u een beam hebben(3000)(1)?"
+Input k$
+If k$ = "q" Then GoTo 67
+If k$ = "k" Then GoTo 104
+Print "wilt u een multicom kopen(5000)(1) ?"
+Input l$
+If l$ = "q" Then GoTo 67
+If l$ = "k" Then GoTo 104
+Print "wilt u een tracer hebben(10000)(1) ?"
+Input m$
+If m$ = "q" Then GoTo 67
+104
+If B$ <> "y" Then GoTo 105
+If cerdit < 200 Then GoTo 67
+Let cerdit = cerdit - 250
+Let roket = roket + 1
+105
+If i$ <> "y" Then GoTo 106
+If cerdit < 550 Then GoTo 67
+Let cerdit = cerdit - 550
+Let exsha = exsha + 1
+106
+If k$ <> "y" Then GoTo 107
+If cerdit < 3000 Then GoTo 67
+Let cerdit = cerdit - 3050
+Let beam = beam = 1
+107
+If l$ <> "y" Then GoTo 108
+If cerdit < 5000 Then GoTo 67
+Let cerdit = cerdit - 5050
+Let multicom = 1
+108
+If m$ <> "y" Then GoTo 67
+If cerdit < 10000 Then GoTo 67
+Let cerdit = cerdit - 10050
+Let tracker = 1
+GoTo 67
+102
+Print "wilt u betere rokets?(400)"
+Input c$
+If c$ = "q" Then GoTo 67
+If c$ = "k" Then GoTo 46
+Print "wilt u betere lasers?(600)"
+Input d$
+If d$ = "q" Then GoTo 67
+If d$ = "k" Then GoTo 46
+Print "wilt u betere extrashields?(750)"
+Input j$
+If j$ = "q" Then GoTo 67
+If j$ = "k" Then GoTo 46
+Print "wilt u energy tanks kopen?(800)(+1)"
+Input e$
+If e$ = "q" Then GoTo 67
+If e$ = "k" Then GoTo 46
+Print "wilt u u ship verbeteren?(1000)"
+Input F$
+If F$ = "q" Then GoTo 67
+If F$ = "k" Then GoTo 46
+Print "wilt u u shield beter maken(1500)(+25)"
+Input G$
+If G$ = "q" Then GoTo 67
+If G$ = "k" Then GoTo 46
+Print " wilt u u energy beter maken(2000)(+50)"
+Input h$
+If h$ = "q" Then GoTo 1
+If B$ <> "y" Then GoTo 46
+If cerdit < 200 Then GoTo 67
+Let cerdit = cerdit - 200
+Let roket = roket + 1
+46
+If c$ <> "y" Then GoTo 80
+If cerdit < 400 Then GoTo 67
+Let cerdit = cerdit - 400
+Let roklv = roklv + .25
+80
+If i$ <> "y" Then GoTo 47
+If cerdit < 550 Then GoTo 67
+Let cerdit = cerdit - 550
+Let exsha = exsha + 1
+47
+If d$ <> "y" Then GoTo 81
+If cerdit < 600 Then GoTo 67
+Let cerdit = cerdit - 600
+Let laserlv = laserlv + .25
+81
+If j$ <> "y" Then GoTo 48
+If cerdit < 750 Then GoTo 67
+Let cerdit = cerdit - 750
+Let exshl = exshl + .25
+
+48
+If e$ <> "y" Then GoTo 50
+If cerdit < 800 Then GoTo 67
+Let cerdit = cerdit - 800
+Let fuelt = fuelt + 1
+50
+If F$ <> "y" Then GoTo 51
+If cerdit < 1000 Then GoTo 67
+Let cerdit = cerdit - 1000
+Let shplv = shplv + .25
+51
+If G$ <> "y" Then GoTo 58
+If cerdit < 1500 Then GoTo 67
+Let cerdit = cerdit - 1500
+Let mxsh = mxsh + 25
+58
+If h$ <> "y" Then GoTo 67
+If cerdit < 2000 Then GoTo 67
+Let cerdit = cerdit - 2000
+Let mxen = mxen + 50
+GoTo 67
+61
+Cls
+Print "                      bank"
+Print
+Print "u heeft"; cerdit; "$"
+Print "wilt u 1:lenen"
+Print "       2:sparen"
+Print "       3:pinnen(opnemen/storten)"
+Print "       4:aflossen"
+Print "       5:saldo "
+Print "       6:terug"
+Input bank1
+If bank1 = 1 Then GoTo 62
+If bank1 = 2 Then GoTo 63
+If bank1 = 3 Then GoTo 64
+If bank1 = 4 Then GoTo 65
+If bank1 = 5 Then Print "U heeft"; gespbed; "op uw rekening": Sleep: GoTo 61
+If bank1 = 6 Then GoTo 67
+GoTo 67
+62
+Cls
+Print "hoeveel wilt u lenen ?(max20000$)"
+Input lenbed
+If lenbed > 20000 Then Let lenbed = 20000
+If lenbed <= 0 Then GoTo 61
+Let cerdit = cerdit + lenbed
+Let leen = 1: Let geleend = lenbed
+Print "u heeft"; lenbed; "$geleend"
+Sleep
+GoTo 61
+63
+Cls
+Let fout = 0
+If rekrek = 1 Then Print "u heef al een rekening": GoTo 61
+If leen = 1 Then Print "moet nog u lening afbetalen": GoTo 61
+Print "wat voor rekening wilt u?"
+Print "rekening 1:elke maand +5%"
+Print "rekening 2:elke maand +200$"
+Print "rekening 3:min 10000$,elke maand +10% "
+Print "rekening 4:min 50000$,elke maand +15% "
+Print "rekening 5:min 100000$,elke maand +30%,als u het opneemt -2.5%"
+Input rek
+If rek < 1 Then GoTo 61
+If rek > 5 Then GoTo 61
+Let rekening(rek) = 1
+Input "hoeveel wilt u er op zetten?"; gespbed
+If rek = 3 And gespbed < 10000 Then Print "te weinig": Sleep: GoTo 61
+If rek = 4 And gespbed < 50000 Then Print "te weinig": Sleep: GoTo 61
+If rek = 5 And gespbed < 100000 Then Print "te weinig": Sleep: GoTo 61
+If gespbed > cerdit Then Print "u heeft te weinig $": Sleep: GoTo 61
+Let pinn1 = Int(Rnd(1) * 8 + 1)
+Let cerdit = cerdit - gespbed
+Let pinn2 = Int(Rnd(1) * 8 + 1)
+Let pinn3 = Int(Rnd(1) * 8 + 1)
+Let pinn4 = Int(Rnd(1) * 8 + 1)
+
+Let pinnum = (pinn1 * 1000) + (pinn2 * 100) + (pinn3 * 10) + pinn4
+Print "un pinnummer = :"; pinnum; ",onthoud het goed!"
+Sleep
+Let rekrek = 1
+GoTo 61
+64
+Cls
+If rekrek = Not 1 Then GoTo 61
+Print "wat is u pinnummer ?"
+Print "type 0 voor terug "
+Input pisn
+If pisn = 0 Then GoTo 61
+If fout = 2 Then Let rekrek = 0: Let gespbed = 0: Print "u bent u rekening en u geld kwijt!": Let fout = 0: GoTo 61
+If pisn = 1221 Then Let gespbed = gespbed + 1000: Print pinnum: Sleep: GoTo 64
+If pisn <> pinnum Then Let fout = fout + 1: Print "dat is fout": GoTo 64
+Let fout = 0
+Print "wilt u (1)storten of (2)opnemen?"
+Input er
+If er < 1 Then GoTo 61
+If er > 2 Then GoTo 61
+If er = 2 Then GoTo 66
+Print "er staat"; gespbed; "$ op u rekening."
+Print "en u heef"; cerdit; "$"
+Print "hoeveel wilt u storten?"
+Print "123123=alles"
+Input "$"; stort
+If stort = 123123 Then Let gespbed = gespbed + cerdit: Let cerdit = 0: GoTo 61
+If stort <= 0 Then GoTo 61
+If stort > cerdit Then Print "u heef te weinig$": Sleep: GoTo 61
+Let cerdit = cerdit - stort: Let gespbed = gespbed + stort
+GoTo 61
+65
+Print "U heeft "; lendbed; "$ schuld bij ons."
+Print "U heeft "; cerdit; "$"
+Print "hoeveel wilt u aflossen?"
+Input aflos
+If aflos <= 0 Then GoTo 61
+If aflos > cerdit Then GoTo 61
+If aflos > geleend Then Print "teveel": GoTo 61
+Let geleend = geleend - aflos
+Let cerdit = cerdit - aflos
+Print "u heeft nog"; geleend; "$ schuld bij ons"
+GoTo 61
+66
+Cls
+Print "Er staat"; gespbed; "$ op u rekening"
+Print "hoeveel wilt u opnemen ?"
+Print "123123 = alles"
+Input opn
+If opn = 123123 Then Let cerdit = cerdit + gespbed: Let gespbed = 0: Let rekrek = 0: GoTo 61
+If opn <= 0 Then GoTo 61
+If opn > gespbed Then GoTo 61
+Let gespbed = gespbed - opn
+If rek = 5 Then Let opn = opn - (opn * .025)
+Let cerdit = cerdit + opn
+If gespbed = 0 Then Let leen = 0
+GoTo 61
+67
+Cls
+Print "wat wilt u ?"
+Print "(1) bank"
+Print "(2) kopen"
+Print "(3) frecuenties"
+Print "(4) auto's"
+Print "(5) upgrading"
+Print "(6) terug"
+Input a
+If a = 1 Then GoTo 61
+If a = 2 Then GoTo 49
+If a = 3 Then GoTo 110
+If a = 4 Then GoTo 113
+If a = 5 Then GoTo 119
+Cls
+GoTo 52
+75
+Cls
+Print "please input detonation point"
+Print " 121 .121 for time bom"
+Input "x"; prrx
+Input "y"; prry
+Input "tijd"; tyo
+Input "explp"; explp
+If prrx = 121.121 Then Let rkstp = 1 Else Let rkstp = 0
+If prrx = .1 And prry = .1 Then GoTo 1
+If tyo = 0 Then Let tyo = 10000
+Let erk = 0
+Let rok = rok + 1
+If rok = 2 Then Let rok = 0
+If rkstp = 1 Then Let prrx = xcoi: Let prry = ycoi
+Let selmv = 1
+Let explp = explp / 100
+Let energy = energy - (1 * (explp * 10))
+Let roket = roket - 1
+Let rokx = xcoi
+Let roky = ycoi
+Let rokmvx = mvx: Let rokmvy = mvy
+Let pt = 0
+GoTo 54
+82
+Cls
+Print "please input destination point"
+Input "x"; xgo
+Input "y"; ygo
+Input "speed"; spgo
+If spgo = 0 Then Let gur = 0: GoTo 1
+Let gur = 1
+Cls
+GoTo 1
+86
+Input "gespbed"; gespbed
+Input "shplv"; shplv
+Input "laserlv"; laserlv
+Input "roklv"; roklv
+Input "rokets"; roket
+Input "fuelt"; fuelt
+Input "mxsh"; mxsh
+Input "mxen"; mxen
+GoTo 1
+101
+If beam = 0 GoTo 1
+If en = 0 GoTo 1
+If exsh = 1 GoTo 1
+Print "beamer"
+Print mxbeamfr
+Input "frecuenty"; beamfr
+If beamfr > mxbeamfr Then Let beamfr = mxbeamfr
+Print "waar?"
+Input "x"; endesx
+Input "y"; endesy
+Let energy = energy - 20
+GoTo 1
+110
+Cls
+Print "(1)laserfr"; lasfr
+Print "(2)beamfr"; beamfr
+Print "(3)shfr"; shfr
+Print "(4)exshfr"; exshfr
+Print "welke wil je veranderen?"
+Input a
+Print "naar wat ?"
+Input B
+If a = 1 Then Let lasfr = B
+If a = 2 Then Let beamfr = B
+If a = 3 Then Let shfr = B
+If a = 4 Then Let exshfr = B
+If lasfr > mxlasfr Then Let lasfr = mxlasfr
+If beamfr > mxbeamfr Then Let beamfr = mxbeamfr
+If shfr > mxshfr Then Let shfr = mxshfr
+If exshfr > mxexshfr Then Let exshfr = mxexshfr
+Print "laserfr"; lasfr
+Print "beamfr"; beamfr
+Print "shfr"; shfr
+Print "exshfr"; exshfr
+Print "nog een keer?"
+Input B$
+If B$ = "j" Then GoTo 110
+GoTo 67
+113
+Print "(1)autolas"; autolas; "(2)autofr"; autofr
+Print "(3)autorok"; autorok; "(4)autorefuel "; autorefuel
+Print "(5)allemaal"
+Print "welke wil je veranderen?"
+Input a
+Print "(1)wel-(0) niet"
+Input B
+If a = 1 Then Let autolas = B
+If a = 2 Then Let autofr = B
+If a = 3 Then Let autorok = B
+If a = 4 Then Let autorefuel = B
+If a = 5 Then Let autolas = B: Let autofr = B: Let autorok = B: Let autorefuel = B
+GoTo 67
+119
+If xcoi > 350 And xcoi < 500 And ycoi > -100 And ycoi < 100 Then Let ha = 1 Else Print "te ver": GoTo 67
+Print "u heeft"; cerdit; "cerdis"
+Print "elke sec kost u 1000 cerdit"
+Print " hoeveel seconden ?"
+Input ae2
+Let a = ae2 * 1000
+If a > cerdit Then GoTo 67
+If a <= cerdit Then Let cerdit = cerdit - a
+Let docking = 1
+Let ae = 0
+Let dok = 0
+GoTo 67
+115
+For x = 0 To 100
+    Line (325, x)-(325, 0), 4
+    Line (325, -x)-(325, 0), 4
+Next x
+For x = 325 To 525
+    Line (x, 100)-(325, 100), 4
+    Line (x, -100)-(325, -100), 4
+Next x
+For x = 100 To 0 Step -1
+    Line (525, x)-(525, 100), 4
+    Line (525, -x)-(525, -100), 4
+Next x
+'Sound 300, 2
+Print "docking complete"
+Let docking = 0
+Let dok2 = 1
+GoTo 1
+1111
+Cls
+Print "wilt u verder gaan j/n"
+Input st$
+If st$ = "j" GoTo 0
+If st$ = "y" GoTo 0
+If st$ = "yes" GoTo 0
+If st$ = "ja" GoTo 0
+

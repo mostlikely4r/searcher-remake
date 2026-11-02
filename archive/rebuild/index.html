@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070b1a">
+  <title>Searcher — Flight Study</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #070b1a; }
+    body { color: #e5efff; }
+    canvas { display: block; width: 100%; height: 100%; }
+    .hud { position: fixed; inset: 0; pointer-events: none; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+    .top, .bottom { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .brand, .readout, .help { border: 1px solid rgba(148,180,255,.16); background: rgba(8,14,34,.72); backdrop-filter: blur(10px); border-radius: 12px; }
+    .brand { padding: 12px 16px; }
+    .brand strong { display: block; font-size: 12px; letter-spacing: .2em; color: #9dbdff; }
+    .brand span { display: block; margin-top: 5px; font-size: 11px; color: #7f91b4; }
+    .readout { min-width: 148px; padding: 11px 14px; text-align: right; font: 12px/1.65 ui-monospace, SFMono-Regular, Consolas, monospace; color: #94a8ce; }
+    .readout b { color: #dce8ff; font-weight: 500; }
+    .help { padding: 10px 14px; color: #8598bc; font-size: 11px; line-height: 1.65; }
+    .help b { color: #cedcff; font-weight: 550; }
+    .hint { align-self: flex-end; margin: 0; padding: 10px 12px; color: #6f82a8; font-size: 11px; }
+    @media (max-width: 560px) { .hud { padding: 12px; } .brand { padding: 9px 11px; } .readout { min-width: 120px; font-size: 10px; } .help { max-width: 220px; } }
+  </style>
+</head>
+<body>
+  <canvas id="space" aria-label="A small ship moves through a starfield. Use WASD or arrow keys to fly; hold Space to brake."></canvas>
+  <div class="hud" aria-hidden="true">
+    <div class="top">
+      <div class="brand"><strong>SEARCHER</strong><span>FLIGHT STUDY · 01</span></div>
+      <div class="readout">VELOCITY&nbsp; <b id="speed">0</b><br>POSITION&nbsp; <b id="position">0, 0</b></div>
+    </div>
+    <div class="bottom">
+      <div class="help"><b>W A S D</b> / arrows · fly<br><b>SPACE</b> · brake<br><b>R</b> · reset position</div>
+      <p class="hint">Velocity driven · four-lobe ship</p>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const canvas = document.querySelector('#space');
+      const ctx = canvas.getContext('2d');
+      const speedLabel = document.querySelector('#speed');
+      const positionLabel = document.querySelector('#position');
+      const keys = new Set();
+      const ship = { x: 0, y: 0, vx: 0, vy: 0 };
+      const maxSpeed = 230;
+      const acceleration = 390;
+      const brakeRate = 8.5;
+      const stars = [];
+      let width = 0, height = 0, dpr = 1, lastTime = performance.now();
+      let seed = 17419;
+      const random = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+      for (let i = 0; i < 240; i++) stars.push({ x: random(), y: random(), r: .35 + random() * 1.15, a: .16 + random() * .48, phase: random() * Math.PI * 2 });
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth; height = window.innerHeight;
+        canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      window.addEventListener('resize', resize);
+      window.addEventListener('keydown', event => {
+        const key = event.key.toLowerCase();
+        if (['arrowup','arrowdown','arrowleft','arrowright',' '].includes(key)) event.preventDefault();
+        keys.add(key);
+        if (key === 'r' && !event.repeat) { ship.x = 0; ship.y = 0; }
+      });
+      window.addEventListener('keyup', event => keys.delete(event.key.toLowerCase()));
+      window.addEventListener('blur', () => keys.clear());
+
+      function update(dt) {
+        let ax = 0, ay = 0;
+        if (keys.has('a') || keys.has('arrowleft')) ax--;
+        if (keys.has('d') || keys.has('arrowright')) ax++;
+        if (keys.has('w') || keys.has('arrowup')) ay--;
+        if (keys.has('s') || keys.has('arrowdown')) ay++;
+        const inputLength = Math.hypot(ax, ay) || 1;
+        if (ax || ay) { ship.vx += ax / inputLength * acceleration * dt; ship.vy += ay / inputLength * acceleration * dt; }
+        if (keys.has(' ')) { const factor = Math.exp(-brakeRate * dt); ship.vx *= factor; ship.vy *= factor; }
+        const speed = Math.hypot(ship.vx, ship.vy);
+        if (speed > maxSpeed) { ship.vx = ship.vx / speed * maxSpeed; ship.vy = ship.vy / speed * maxSpeed; }
+        ship.x += ship.vx * dt; ship.y += ship.vy * dt;
+      }
+
+      function drawBackground(time) {
+        ctx.fillStyle = '#070b1a'; ctx.fillRect(0, 0, width, height);
+        const parallax = .12;
+        for (const star of stars) {
+          let x = ((star.x * width - ship.x * parallax) % width + width) % width;
+          let y = ((star.y * height - ship.y * parallax) % height + height) % height;
+          const twinkle = .78 + Math.sin(time * .001 + star.phase) * .22;
+          ctx.beginPath(); ctx.arc(x, y, star.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(174,203,255,${star.a * twinkle})`; ctx.fill();
+        }
+        const glow = ctx.createRadialGradient(width * .5, height * .48, 0, width * .5, height * .48, Math.max(width, height) * .55);
+        glow.addColorStop(0, 'rgba(28,53,105,.13)'); glow.addColorStop(1, 'rgba(7,11,26,0)');
+        ctx.fillStyle = glow; ctx.fillRect(0, 0, width, height);
+        ctx.strokeStyle = 'rgba(116,155,225,.055)'; ctx.lineWidth = 1;
+        const grid = 112; const ox = ((-ship.x * .22) % grid + grid) % grid; const oy = ((-ship.y * .22) % grid + grid) % grid;
+        for (let x = ox; x < width; x += grid) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke(); }
+        for (let y = oy; y < height; y += grid) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke(); }
+      }
+
+      function drawShip(time) {
+        const cx = width / 2, cy = height / 2;
+        const speed = Math.hypot(ship.vx, ship.vy);
+        const t = Math.min(speed / maxSpeed, 1);
+        const angle = speed > .01 ? Math.atan2(ship.vy, ship.vx) : 0;
+        const ux = Math.cos(angle), uy = Math.sin(angle), px = -uy, py = ux;
+        const along = 1 - .22 * t, across = 1 + .38 * t;
+        const lobes = [[0,-1],[1,0],[0,1],[-1,0]];
+        ctx.save(); ctx.translate(cx, cy);
+        ctx.globalCompositeOperation = 'lighter';
+        for (const [dx, dy] of lobes) {
+          const bx = dx * 15, by = dy * 15;
+          const parallel = bx * ux + by * uy, perpendicular = bx * px + by * py;
+          const x = ux * parallel * along + px * perpendicular * across;
+          const y = uy * parallel * along + py * perpendicular * across;
+          const elongation = 1 + .58 * t;
+          ctx.save(); ctx.translate(x, y); ctx.rotate(angle + Math.PI / 2);
+          ctx.shadowColor = 'rgba(51,133,255,.9)'; ctx.shadowBlur = 20;
+          ctx.fillStyle = 'rgba(44,121,255,.26)'; ctx.beginPath(); ctx.ellipse(0, 0, 6.4, 6.4 * elongation, 0, 0, Math.PI * 2); ctx.fill();
+          ctx.shadowBlur = 8; ctx.fillStyle = '#4c9cff'; ctx.beginPath(); ctx.ellipse(0, 0, 4.8, 4.8 * elongation, 0, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = '#b9dcff'; ctx.beginPath(); ctx.ellipse(-1.2, -1.3, 1.35, 1.35 * elongation, 0, 0, Math.PI * 2); ctx.fill();
+          ctx.restore();
+        }
+        const pulse = .72 + Math.sin(time * .004) * .08;
+        ctx.globalCompositeOperation = 'source-over'; ctx.fillStyle = `rgba(142,197,255,${pulse})`;
+        ctx.beginPath(); ctx.arc(0, 0, 1.5, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+      }
+
+      function frame(now) {
+        const dt = Math.min((now - lastTime) / 1000, .04); lastTime = now;
+        update(dt); drawBackground(now); drawShip(now);
+        speedLabel.textContent = String(Math.round(Math.hypot(ship.vx, ship.vy)));
+        positionLabel.textContent = `${Math.round(ship.x)}, ${Math.round(ship.y)}`;
+        requestAnimationFrame(frame);
+      }
+      resize(); requestAnimationFrame(frame);
+    })();
+  </script>
+</body>
+</html>
